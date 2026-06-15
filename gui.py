@@ -3,6 +3,10 @@ from tkinter import messagebox
 import sqlite3
 import hashlib
 
+login_attempts = 0
+MAX_ATTEMPTS = 3
+
+
 def verify_security(user):
 
     security_window = tk.Toplevel()
@@ -20,12 +24,16 @@ def verify_security(user):
 
     def check_answer():
 
-        if answer_entry.get().lower() == user[3].lower():
+        entered_answer_hash = hashlib.sha256(
+            answer_entry.get().lower().encode()
+        ).hexdigest()
+
+        if entered_answer_hash == user[4]:
 
             security_window.destroy()
 
             messagebox.showinfo(
-                "Success",
+                "Access Granted",
                 "🎉 ACCESS GRANTED 🎉"
             )
 
@@ -42,6 +50,7 @@ def verify_security(user):
         command=check_answer
     ).pack(pady=10)
 
+
 def verify_pin(user):
 
     pin_window = tk.Toplevel()
@@ -54,12 +63,19 @@ def verify_pin(user):
         text="Enter PIN"
     ).pack(pady=10)
 
-    pin_entry = tk.Entry(pin_window, show="*")
+    pin_entry = tk.Entry(
+        pin_window,
+        show="*"
+    )
     pin_entry.pack()
 
     def check_pin():
 
-        if pin_entry.get() == user[2]:
+        entered_pin_hash = hashlib.sha256(
+            pin_entry.get().encode()
+        ).hexdigest()
+
+        if entered_pin_hash == user[3]:
 
             pin_window.destroy()
 
@@ -69,7 +85,7 @@ def verify_pin(user):
             )
 
             verify_security(user)
-            
+
         else:
 
             messagebox.showerror(
@@ -83,7 +99,10 @@ def verify_pin(user):
         command=check_pin
     ).pack(pady=10)
 
+
 def login():
+
+    global login_attempts
 
     username = username_entry.get()
     password = password_entry.get()
@@ -105,6 +124,9 @@ def login():
     conn.close()
 
     if user:
+
+        login_attempts = 0
+
         messagebox.showinfo(
             "Success",
             "Level 1 Passed!"
@@ -113,15 +135,33 @@ def login():
         verify_pin(user)
 
     else:
-        messagebox.showerror(
-            "Error",
-            "Invalid Username or Password"
-        )
+
+        login_attempts += 1
+
+        remaining = MAX_ATTEMPTS - login_attempts
+
+        if remaining > 0:
+
+            messagebox.showerror(
+                "Error",
+                f"Invalid Username or Password\nAttempts Left: {remaining}"
+            )
+
+        else:
+
+            messagebox.showerror(
+                "Locked",
+                "Too many failed attempts.\nApplication will close."
+            )
+
+            window.destroy()
+
 
 window = tk.Tk()
 
 window.title("FortiGuard")
 window.geometry("400x300")
+window.resizable(False, False)
 
 tk.Label(
     window,
@@ -129,14 +169,28 @@ tk.Label(
     font=("Arial", 20, "bold")
 ).pack(pady=10)
 
-tk.Label(window, text="Username").pack()
+tk.Label(
+    window,
+    text="Three-Level Password Authentication System"
+).pack(pady=5)
+
+tk.Label(
+    window,
+    text="Username"
+).pack()
 
 username_entry = tk.Entry(window)
 username_entry.pack()
 
-tk.Label(window, text="Password").pack()
+tk.Label(
+    window,
+    text="Password"
+).pack()
 
-password_entry = tk.Entry(window, show="*")
+password_entry = tk.Entry(
+    window,
+    show="*"
+)
 password_entry.pack()
 
 tk.Button(

@@ -16,6 +16,14 @@ hashed_password = hashlib.sha256(
 pin = input("Enter 4-digit PIN: ")
 security_answer = input("Favourite Colour: ")
 
+hashed_pin = hashlib.sha256(
+    pin.encode()
+).hexdigest()
+
+hashed_security_answer = hashlib.sha256(
+    security_answer.lower().encode()
+).hexdigest()
+
 cursor.execute(
     "SELECT username FROM users WHERE username=?",
     (username,)
@@ -34,7 +42,12 @@ cursor.execute(
     (username, password, pin, security_answer)
     VALUES (?, ?, ?, ?)
     """,
-    (username, hashed_password, pin, security_answer)
+    (
+    username,
+    hashed_password,
+    hashed_pin,
+    hashed_security_answer
+)
 )
 
 conn.commit()
