@@ -69,3 +69,21 @@ Access Granted
 ## Author
 
 Developed as a cybersecurity authentication project using Python.
+
+## Screenshots
+
+### Login Screen
+
+![Login Screen](screenshots/login.png)
+
+### PIN Verification
+
+![PIN Verification](screenshots/pin.png)
+
+### Security Question
+
+![Security Question](screenshots/security.png)
+
+### Access Granted
+
+![Access Granted](screenshots/access.png)
