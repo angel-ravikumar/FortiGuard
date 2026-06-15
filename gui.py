@@ -160,18 +160,19 @@ def login():
 window = tk.Tk()
 
 window.title("FortiGuard")
-window.geometry("400x300")
+window.geometry("500x400")
 window.resizable(False, False)
 
 tk.Label(
     window,
-    text="FortiGuard",
-    font=("Arial", 20, "bold")
-).pack(pady=10)
+    text="🔐 FortiGuard",
+    font=("Arial", 24, "bold")
+).pack(pady=20)
 
 tk.Label(
     window,
-    text="Three-Level Password Authentication System"
+    text="Three-Level Password Authentication System",
+    font=("Arial", 10)
 ).pack(pady=5)
 
 tk.Label(
@@ -179,7 +180,10 @@ tk.Label(
     text="Username"
 ).pack()
 
-username_entry = tk.Entry(window)
+username_entry = tk.Entry(
+    window,
+    width=30
+)
 username_entry.pack()
 
 tk.Label(
@@ -189,6 +193,7 @@ tk.Label(
 
 password_entry = tk.Entry(
     window,
+    width=30,
     show="*"
 )
 password_entry.pack()
@@ -196,7 +201,9 @@ password_entry.pack()
 tk.Button(
     window,
     text="Login",
-    command=login
-).pack(pady=15)
+    command=login,
+    width=15,
+    height=2
+).pack(pady=20)
 
 window.mainloop()
