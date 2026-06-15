@@ -1,76 +1,86 @@
-# FortiGuard 🔐
+# 🔐 FortiGuard
 
-A Three-Level Password Authentication System developed using Python, SQLite, Tkinter, and SHA-256 password hashing.
+A Three-Level Password Authentication System developed using Python, Tkinter, SQLite, and SHA-256 hashing.
 
-## Features
+## 📌 Overview
 
-* User Registration System
-* Secure Password Hashing using SHA-256
-* SQLite Database Integration
-* GUI using Tkinter
-* Three-Level Authentication:
+FortiGuard is a multi-layer authentication system that enhances security by requiring users to pass three verification stages before gaining access.
 
-  * Level 1: Username and Password
-  * Level 2: PIN Verification
-  * Level 3: Security Question Verification
-* Access Control System
+The system combines:
 
-## Technologies Used
+- Username & Password Authentication
+- PIN Verification
+- Security Question Verification
 
-* Python
-* Tkinter
-* SQLite
-* hashlib
-* Git
-* GitHub
+All authentication credentials are securely stored using SHA-256 hashing.
 
-## Project Structure
+---
 
+## ✨ Features
+
+- User Registration
+- SQLite Database Integration
+- SHA-256 Password Hashing
+- SHA-256 PIN Hashing
+- SHA-256 Security Answer Hashing
+- Three-Level Authentication
+- GUI Interface using Tkinter
+- Login Attempt Protection (3 Attempts)
+- Git Version Control
+
+---
+
+## 🛠 Technologies Used
+
+| Technology | Purpose |
+|------------|----------|
+| Python | Core Programming |
+| Tkinter | GUI Development |
+| SQLite | Database |
+| hashlib | SHA-256 Hashing |
+| Git | Version Control |
+| GitHub | Project Hosting |
+
+---
+
+## 🔄 Authentication Workflow
+
+```text
+Username + Password
+        ↓
+Level 1 Passed
+        ↓
+PIN Verification
+        ↓
+Level 2 Passed
+        ↓
+Security Question
+        ↓
+🎉 ACCESS GRANTED 🎉
+```
+
+---
+
+## 📂 Project Structure
+
+```text
 FortiGuard/
-
 ├── database.py
-
 ├── register.py
-
 ├── login.py
-
 ├── gui.py
+├── README.md
+├── .gitignore
+└── screenshots/
+    ├── login.png
+    ├── pin.png
+    ├── security.png
+    └── access.png
+```
 
-├── main.py
+---
 
-└── README.md
-
-## Authentication Workflow
-
-Level 1 → Username + Password
-
-↓
-
-Level 2 → PIN Verification
-
-↓
-
-Level 3 → Security Question
-
-↓
-
-Access Granted
-
-## Future Enhancements
-
-* OTP Verification
-* Email Authentication
-* Password Reset Feature
-* Flask Web Application
-* MySQL Integration
-* Docker Deployment
-* Role-Based Access Control
-
-## Author
-
-Developed as a cybersecurity authentication project using Python.
-
-## Screenshots
+## 📸 Screenshots
 
 ### Login Screen
 
@@ -87,3 +97,56 @@ Developed as a cybersecurity authentication project using Python.
 ### Access Granted
 
 ![Access Granted](screenshots/access.png)
+
+---
+
+## 🚀 How to Run
+
+### Clone Repository
+
+```bash
+git clone https://github.com/angel-ravikumar/FortiGuard.git
+```
+
+### Open Project
+
+```bash
+cd FortiGuard
+```
+
+### Create Database
+
+```bash
+python database.py
+```
+
+### Register User
+
+```bash
+python register.py
+```
+
+### Launch Application
+
+```bash
+python gui.py
+```
+
+---
+
+## 🔮 Future Enhancements
+
+- Email OTP Verification
+- Password Reset Feature
+- Flask Web Version
+- MySQL Integration
+- Role-Based Authentication
+- Docker Deployment
+
+---
+
+## 👩‍💻 Author
+
+Angel R
+
+Developed as an internship cybersecurity project using Python.
